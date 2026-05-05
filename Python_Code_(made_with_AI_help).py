@@ -6,7 +6,7 @@ arduino = serial.Serial('/dev/ttyUSB0', 9600)
 time.sleep(2)
 
 def map_value(value, in_min, in_max, out_min, out_max):
-    """Mapeia um valor de um intervalo para outro"""
+    """Maps a value from one range to another"""
     return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
 while True:
@@ -17,7 +17,7 @@ while True:
     tempGPU =  list(temps.values())[1][1].current
     
     # Map temperature (20-80°C) to PWM (0-255)
-    pwm = map_value(temp, 20, 50, 175, 255)
+    pwm = map_value(temp, 20, 80, 175, 255)
     
     # Clamp values between 0 and 255
     pwm = max(0, min(255, int(pwm)))
