@@ -13,9 +13,9 @@ while True:
     # Get temperatures
     temps = psutil.sensors_temperatures()
     # Get CPU temperature (find CPU in Sensorlist.py)
-    tempCPU = list(temps.values())[1][0].current
+    tempCPU = list(temps.values())[0][0].current
     # Get GPU temperature (find GPU in Sensorlist.py)
-    tempGPU =  list(temps.values())[1][1].current
+    tempGPU =  list(temps.values())[1][0].current
     
     # Map temperature (20-80°C) to PWM (38-255)
     pwmCPU = map_value(tempCPU, 30, 80, 38, 255)
@@ -38,3 +38,4 @@ while True:
     arduino.write(mensagem.encode())
     print(mensagem.strip())
     time.sleep(2)
+    
