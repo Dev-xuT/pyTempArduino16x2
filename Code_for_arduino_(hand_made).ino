@@ -14,7 +14,7 @@ void setup() {
   analogWrite(pwmCPUpin, 200);  // Set minimal speed for system boot
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Initializing...");
+  lcd.print("..Initializing..");
   lcd.setCursor(0, 1);
   delay(1000);
   lcd.print("Not Conected!!!");
