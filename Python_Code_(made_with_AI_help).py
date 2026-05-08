@@ -17,11 +17,11 @@ while True:
     # Get GPU temperature (find GPU in Sensorlist.py)
     tempGPU =  list(temps.values())[1][1].current
     
-    # Map temperature (20-80°C) to PWM (0-255)
-    pwm = map_value(temp, 30, 80, 255, 0)
+    # Map temperature (20-80°C) to PWM (38-255)
+    pwm = map_value(temp, 30, 80, 38, 255)
     
-    # Clamp values between 0 and 215 of 255 (15% minimal speed)
-    pwm = max(0, min(215, int(pwm)))
+    # Clamp values between 38 and 255 of 255 (15% minimal speed)
+    pwm = max(38, min(255, int(pwm)))
     
     # Get CPU usage percentage
     usage = psutil.cpu_percent(interval=1)
