@@ -32,11 +32,8 @@ while True:
     # Clamp values between 38 and 255
     pwmCHA = max(38, min(255, int(pwmCHA)))
     
-    # Get CPU usage percentage
-    usage = psutil.cpu_percent(interval=1)
-    
     # Build message
-    mensagem = f"CPU Temp = {tempCPU:.0f} C\nGPU Temp = {tempGPU:.0f} C\nMax Temp = {max_temp:.0f} C\nCPU Use = {usage:.0f}%\npwmCPU = {pwmCPU}\npwmCHA = {pwmCHA}\n"
+    mensagem = f"CPU Temp = {tempCPU:.0f} C\nGPU Temp = {tempGPU:.0f} C\nMax Temp = {max_temp:.0f} C\npwmCPU = {pwmCPU}\npwmCHA = {pwmCHA}\n"
     
     arduino.write(mensagem.encode())
     print(mensagem.strip())
