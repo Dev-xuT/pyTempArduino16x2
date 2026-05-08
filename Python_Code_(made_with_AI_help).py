@@ -10,6 +10,9 @@ def map_value(value, in_min, in_max, out_min, out_max):
     return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
 while True:
+    # Limpa a tela usando Escape ANSI (funciona no Thonny e terminal)
+    print('\033[2J\033[H', end='', flush=True)
+    
     # Get temperatures
     temps = psutil.sensors_temperatures()
     # Get CPU temperature (find CPU in Sensorlist.py)
@@ -38,4 +41,3 @@ while True:
     arduino.write(mensagem.encode())
     print(mensagem.strip())
     time.sleep(2)
-    
