@@ -33,7 +33,7 @@ while True:
     pwmCHA = max(38, min(255, int(pwmCHA)))
     
     # Build message
-    mensagem = f"CPU Temp = {tempCPU:.0f} C\nGPU Temp = {tempGPU:.0f} C\nMax Temp = {max_temp:.0f} C\npwmCPU = {pwmCPU}\npwmCHA = {pwmCHA}\n"
+    mensagem = f"CPU Temp = {tempCPU:.0f} C\nGPU Temp = {tempGPU:.0f} C\npwmCPU = {pwmCPU}\npwmCHA = {pwmCHA}\n"
     
     arduino.write(mensagem.encode())
     print(mensagem.strip())
