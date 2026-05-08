@@ -10,7 +10,7 @@ def map_value(value, in_min, in_max, out_min, out_max):
     return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
 while True:
-    # Limpa a tela usando Escape ANSI (funciona no Thonny e terminal)
+    # Clear screen using Escape ANSI
     print('\033[2J\033[H', end='', flush=True)
     
     # Get temperatures
