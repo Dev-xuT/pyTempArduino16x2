@@ -13,21 +13,30 @@ while True:
     # Get temperatures
     temps = psutil.sensors_temperatures()
     # Get CPU temperature (find CPU in Sensorlist.py)
-    temp = list(temps.values())[1][0].current
+    tempCPU = list(temps.values())[1][0].current
     # Get GPU temperature (find GPU in Sensorlist.py)
     tempGPU =  list(temps.values())[1][1].current
     
     # Map temperature (20-80°C) to PWM (38-255)
-    pwm = map_value(temp, 30, 80, 38, 255)
+    pwmCPU = map_value(tempCPU, 30, 80, 38, 255)
     
     # Clamp values between 38 and 255 of 255 (15% minimal speed)
-    pwm = max(38, min(255, int(pwm)))
+    pwmCPU = max(38, min(255, int(pwmCPU)))
+    
+    # Get the maximum temperature between CPU and GPU
+    max_temp = max(tempCPU, tempGPU)
+    
+    # Map maximum temperature to second PWM
+    pwmCHA = map_value(max_temp, 30, 80, 38, 255)
+    
+    # Clamp values between 38 and 255
+    pwmCHA = max(38, min(255, int(pwmCHA)))
     
     # Get CPU usage percentage
     usage = psutil.cpu_percent(interval=1)
     
     # Build message
-    mensagem = f"CPU Temp = {temp:.0f} C\nCPU Use = {usage:.0f}%\npwm = {pwm}\n"
+    mensagem = f"CPU Temp = {tempCPU:.0f} C\nGPU Temp = {tempGPU:.0f} C\nMax Temp = {max_temp:.0f} C\nCPU Use = {usage:.0f}%\npwmCPU = {pwmCPU}\npwmCHA = {pwmCHA}\n"
     
     arduino.write(mensagem.encode())
     print(mensagem.strip())
