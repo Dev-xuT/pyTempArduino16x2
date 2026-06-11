@@ -27,13 +27,13 @@ while True:
     pwmCPU = map_value(tempCPU, 20, 80, 0, 255)
     
     # Clamp values between 51 and 255 (20% minimal speed)
-    pwmCPU = max(51, min(255, int(pwmCPU)))
+    pwmCPU = max(90, min(255, int(pwmCPU)))
     
     # Map maximum temperature to second PWM (CAS is for Case fans)
     pwmCAS = map_value(max_temp, 20, 80, 0, 255)
     
     # Clamp values between 51 and 255 (20% minimal speed)
-    pwmCAS = max(51, min(255, int(pwmCAS)))
+    pwmCAS = max(90, min(255, int(pwmCAS)))
     
     # Build message
     mensagem = f"CPU Temp = {tempCPU:.0f} C\nGPU Temp = {tempGPU:.0f} C\npwmCPU = {pwmCPU}\npwmCAS = {pwmCAS}\n"
