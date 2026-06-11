@@ -8,8 +8,8 @@ int pwmCASout = 0;
 void setup() {
   Serial.begin(9600);
   TCCR1B = (TCCR1B & 0b11111000) | 0x01; // Enable 31 khz PWM output. Only for pins 9 & 10
-  analogWrite(pwmCPUpin, 191); // 70% CPU fan speed in boot
-  analogWrite(pwmCASpin, 127); // 50% CASe fan speed in boot
+  analogWrite(pwmCPUpin, 172); // 50% CPU fan speed in boot
+  analogWrite(pwmCASpin, 90); // 20% CASe fan speed in boot
   delay(1000);
 }
 
