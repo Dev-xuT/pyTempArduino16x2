@@ -11,8 +11,8 @@ void setup() {
   Serial.begin(9600);
   lcd.begin(16, 2);
   TCCR1B = (TCCR1B & 0b11111000) | 0x01; // Enable 31 khz PWM output. Only for pins 9 & 10
-  analogWrite(pwmCPUpin, 191); // 70% CPU fan speed in boot
-  analogWrite(pwmCASpin, 127); // 50% CASe fan speed in boot
+  analogWrite(pwmCPUpin, 172); // 50% CPU fan speed in boot
+  analogWrite(pwmCASpin, 90); // 20% CASe fan speed in boot
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("..Initializing..");
@@ -33,7 +33,7 @@ void loop() {
     lcd.setCursor(0, 1);
     lcd.print(tempGPU);
     sscanf(pwmCPU.c_str(), "pwmCPU = %d", &pwmCPUout);
-    sscanf(pwmCAS.c_str(), "pwmCHA = %d", &pwmCASout);
+    sscanf(pwmCAS.c_str(), "pwmCAS = %d", &pwmCASout);
     analogWrite(pwmCPUpin, pwmCPUout);
     analogWrite(pwmCASpin, pwmCASout);
   }
