@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import psutil
 import serial
 import time
@@ -16,24 +18,24 @@ while True:
     # Get temperatures
     temps = psutil.sensors_temperatures()
     # Get CPU temperature (find your CPU sensor with Sensorlist.py)
-    tempCPU = list(temps.values())[1][0].current
+    tempCPU = list(temps.values())[3][0].current
     # Get GPU temperature (find your GPU sensor with Sensorlist.py)
-    tempGPU =  list(temps.values())[0][0].current
+    tempGPU =  list(temps.values())[2][0].current
     
     # Get the maximum temperature between CPU and GPU
     max_temp = max(tempCPU, tempGPU)
     
     # Map temperature (20-80°C) to PWM (51-255)
-    pwmCPU = map_value(tempCPU, 20, 80, 0, 255)
+    pwmCPU = map_value(tempCPU, 40, 80, 50, 255)
     
     # Clamp values between 51 and 255 (20% minimal speed)
-    pwmCPU = max(90, min(255, int(pwmCPU)))
+    pwmCPU = max(50, min(255, int(pwmCPU)))
     
     # Map maximum temperature to second PWM (CAS is for Case fans)
-    pwmCAS = map_value(max_temp, 20, 80, 0, 255)
+    pwmCAS = map_value(max_temp, 40, 80, 50, 255)
     
     # Clamp values between 51 and 255 (20% minimal speed)
-    pwmCAS = max(90, min(255, int(pwmCAS)))
+    pwmCAS = max(50, min(255, int(pwmCAS)))
     
     # Build message
     mensagem = f"pwmCPU = {pwmCPU}\npwmCAS = {pwmCAS}\n"
